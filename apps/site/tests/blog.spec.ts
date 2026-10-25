@@ -27,6 +27,16 @@ test("a post with an image uses its own card", async ({ page, request }) => {
   expect((await request.get(CARD)).status()).toBe(200);
 });
 
+test("the infographic opens full size", async ({ page, request }) => {
+  await page.goto(POST);
+  const img = page.locator('figure a > img[src$="/infographic.png"]');
+  const src = await img.getAttribute("src");
+  await expect(img.locator("..")).toHaveAttribute("href", src!);
+  const res = await request.get(src!);
+  expect(res.status()).toBe(200);
+  expect(res.headers()["content-type"]).toBe("image/png");
+});
+
 test.describe("with reduced motion", () => {
   test.use({ reducedMotion: "reduce" });
 

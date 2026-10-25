@@ -102,6 +102,12 @@ const date = post.data.date.toLocaleDateString("en-GB", { day: "numeric", month:
     border-radius: 8px;
     background: var(--c-code-bg);
   }
+  /* An infographic links to itself, so it can be opened full size. */
+  .post :global(figure > a) {
+    display: block;
+    border-radius: 8px;
+    cursor: zoom-in;
+  }
   .post :global(figcaption) {
     color: var(--c-text-muted);
     font-size: 0.9375rem;
